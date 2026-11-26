@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alpine Courier — a 3D flight game</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="hud" class="hidden">
+  <div class="hud-top">
+    <div class="instruments">
+      <div class="inst"><span class="label">ALTITUDE</span><span id="hud-alt" class="value">0 ft</span></div>
+      <div class="inst"><span class="label">SPEED</span><span id="hud-spd" class="value">0 kt</span></div>
+      <div class="inst"><span class="label">HEADING</span><span id="hud-hdg" class="value">090° E</span></div>
+    </div>
+    <div id="hud-ring" class="ring">RING 1/8</div>
+    <div class="score-block">
+      <div id="hud-score">SCORE 0</div>
+      <div id="hud-time">00:00</div>
+    </div>
+  </div>
+  <div class="hud-bottom">
+    <canvas id="hud-horizon" width="120" height="120" title="Artificial horizon"></canvas>
+    <div class="bars">
+      <div class="bar-row"><span>THR</span><div class="bar"><div id="hud-thr-fill" class="fill thr"></div></div></div>
+      <div class="bar-row"><span id="hud-fuel-text">FUEL 100%</span><div class="bar"><div id="hud-fuel-fill" class="fill fuel"></div></div></div>
+    </div>
+  </div>
+  <div id="hud-msg"></div>
+</div>
+
+<div id="screen-title" class="overlay">
+  <div class="panel">
+    <h1>ALPINE COURIER</h1>
+    <p class="tagline">A 3D flight game over a living valley — rings, ridges, one runway.</p>
+    <p class="brief">Fly the courier through all eight gold rings, then bring her home
+    and land on runway 09. Fuel burns, ridges bite, and a gentle touchdown pays.</p>
+    <div class="buttons">
+      <button id="btn-rings" class="primary">FLY THE RING RUN</button>
+      <button id="btn-free">FREE FLIGHT</button>
+    </div>
+    <p id="best-line" class="best"></p>
+    <div class="controls">
+      <p><b>↑ / ↓</b> climb &amp; descend &nbsp;·&nbsp; <b>← / →</b> bank &amp; turn</p>
+      <p><b>W / S</b> throttle &nbsp;·&nbsp; <b>Shift</b> boost &nbsp;·&nbsp; mouse steers too</p>
+      <p><b>P</b> pause &nbsp;·&nbsp; <b>R</b> restart &nbsp;·&nbsp; <b>M</b> sound</p>
+    </div>
+  </div>
+</div>
+
+<div id="screen-end" class="overlay hidden">
+  <div class="panel">
+    <h1 id="end-title">CRASHED</h1>
+    <div id="end-lines"></div>
+    <p id="end-score" class="score-line">SCORE 0</p>
+    <p id="end-best" class="best"></p>
+    <div class="buttons">
+      <button id="btn-again" class="primary">FLY AGAIN</button>
+      <button id="btn-title">TITLE SCREEN</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0c1a26;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif; color: #fff; }
+
+#game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+.hidden { display: none !important; }
+
+/* ---- HUD ---- */
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+
+.hud-top { position: absolute; top: 0; left: 0; right: 0; display: flex;
+  justify-content: space-between; align-items: flex-start; padding: 14px 18px; }
+
+.instruments { display: flex; gap: 10px; }
+
+.inst { background: rgba(8, 20, 32, 0.72); border: 1px solid rgba(140, 220, 255, 0.45);
+  border-radius: 8px; padding: 8px 12px; min-width: 108px;
+  box-shadow: 0 0 14px rgba(90, 180, 255, 0.25); }
+
+.inst .label { display: block; font-size: 10px; letter-spacing: 2px; color: #8cdcff; }
+.inst .value { display: block; font-size: 22px; font-weight: 700; color: #fff;
+  font-variant-numeric: tabular-nums; text-shadow: 0 0 8px rgba(140, 220, 255, 0.8); }
+
+#hud-ring { background: rgba(8, 20, 32, 0.72); border: 1px solid rgba(255, 194, 51, 0.6);
+  color: #ffc233; border-radius: 8px; padding: 10px 16px; font-size: 17px; font-weight: 700;
+  letter-spacing: 1px; box-shadow: 0 0 14px rgba(255, 194, 51, 0.3); margin-top: 4px; }
+
+.score-block { text-align: right; background: rgba(8, 20, 32, 0.72);
+  border: 1px solid rgba(140, 220, 255, 0.45); border-radius: 8px; padding: 8px 14px; }
+#hud-score { font-size: 20px; font-weight: 700; }
+#hud-time { font-size: 14px; color: #8cdcff; font-variant-numeric: tabular-nums; }
+
+.hud-bottom { position: absolute; left: 18px; bottom: 16px; display: flex;
+  align-items: flex-end; gap: 14px; }
+
+#hud-horizon { background: rgba(8, 20, 32, 0.6); border-radius: 50%;
+  border: 2px solid rgba(140, 220, 255, 0.5); }
+
+.bars { display: flex; flex-direction: column; gap: 8px; padding-bottom: 6px; }
+.bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px;
+  font-weight: 700; letter-spacing: 1px; }
+.bar-row span { width: 86px; text-align: right; color: #cfeaff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
+.bar { width: 190px; height: 12px; background: rgba(8, 20, 32, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 6px; overflow: hidden; }
+.fill { height: 100%; transition: width 0.15s linear; }
+.fill.thr { background: #4fc3f7; width: 0%; }
+.fill.fuel { background: #58d68d; width: 100%; }
+.fill.fuel.low { background: #ff5a4e; }
+
+#hud-msg { position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+  background: rgba(8, 20, 32, 0.82); border: 1px solid rgba(255, 210, 63, 0.7);
+  color: #ffd23f; font-size: 20px; font-weight: 700; letter-spacing: 1px;
+  padding: 12px 22px; border-radius: 10px; opacity: 0; transition: opacity 0.25s;
+  text-align: center; max-width: 80%; }
+#hud-msg.show { opacity: 1; }
+
+/* ---- Overlays ---- */
+.overlay { position: fixed; inset: 0; z-index: 10; display: flex;
+  align-items: center; justify-content: center;
+  background: linear-gradient(rgba(6, 16, 26, 0.25), rgba(6, 16, 26, 0.55)); }
+
+.panel { background: rgba(8, 22, 34, 0.88); border: 1px solid rgba(140, 220, 255, 0.4);
+  border-radius: 16px; padding: 34px 44px; max-width: 620px; text-align: center;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55); }
+
+.panel h1 { font-size: 44px; letter-spacing: 6px; color: #ffd23f;
+  text-shadow: 0 0 22px rgba(255, 210, 63, 0.45); margin-bottom: 10px; }
+
+.tagline { font-size: 17px; color: #cfeaff; margin-bottom: 12px; }
+.brief { font-size: 14px; line-height: 1.6; color: #a8c8de; margin-bottom: 20px; }
+
+.buttons { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; }
+button { font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 1px;
+  padding: 12px 22px; border-radius: 10px; cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.1);
+  color: #fff; }
+button:hover { background: rgba(255, 255, 255, 0.2); }
+button.primary { background: #ffc233; color: #1a1200; border-color: #ffd23f; }
+button.primary:hover { background: #ffd23f; }
+
+.best { font-size: 13px; color: #8cdcff; margin-bottom: 14px; min-height: 16px; }
+.controls { font-size: 13px; color: #9db8c9; line-height: 1.9; }
+.controls b { color: #fff; }
+
+#end-lines p { font-size: 15px; color: #cfeaff; line-height: 1.6; margin-bottom: 6px; }
+.score-line { font-size: 24px; font-weight: 700; color: #ffd23f; margin: 14px 0 4px; }
